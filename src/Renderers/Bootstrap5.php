@@ -4,17 +4,23 @@ declare(strict_types=1);
 
 namespace Flexsyscz\Forms\Renderers;
 
+use Nette\Forms\Controls\BaseControl;
+use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\Checkbox;
+use Nette\Forms\Controls\RadioList;
+use Nette\Forms\Controls\SelectBox;
+use Nette\Forms\Controls\TextBase;
+use Nette\Forms\Controls\UploadControl;
 use Nette\Forms\Form;
 
 
 class Bootstrap5 implements Renderer
 {
-	public const OPTION_BUTTON_CLASS = 'buttonClass';
-	public const OPTION_SWITCH = 'switch';
+	public const OptionButtonClass = 'buttonClass';
+	public const OptionSwitch = 'switch';
 
-	public const DEFAULT_PRIMARY_BUTTON_CLASS = 'btn btn-primary';
-	public const DEFAULT_SECONDARY_BUTTON_CLASS = 'btn btn-outline-secondary';
+	public const DefaultPrimaryButtonClass = 'btn btn-primary';
+	public const DefaultSecondaryButtonClass = 'btn btn-outline-secondary';
 
 
 	/**
@@ -24,8 +30,8 @@ class Bootstrap5 implements Renderer
 	 */
 	public static function make(Form $form, array $options = []): void
 	{
-		$primaryButtonClass = $options[self::OPTION_BUTTON_CLASS]['primary'] ?? self::DEFAULT_PRIMARY_BUTTON_CLASS;
-		$secondaryButtonClass = $options[self::OPTION_BUTTON_CLASS]['secondary'] ?? self::DEFAULT_SECONDARY_BUTTON_CLASS;
+		$primaryButtonClass = $options[self::OptionButtonClass]['primary'] ?? self::DefaultPrimaryButtonClass;
+		$secondaryButtonClass = $options[self::OptionButtonClass]['secondary'] ?? self::DefaultSecondaryButtonClass;
 
 		$renderer = $form->getRenderer();
 		if (isset($renderer->wrappers)) {
@@ -42,34 +48,36 @@ class Bootstrap5 implements Renderer
 		}
 
 		foreach ($form->getControls() as $control) {
-			$type = $control->getOption('type');
-			if ($type === 'button') {
-				$btnClass = $control->getOption(self::OPTION_BUTTON_CLASS);
-				$control->getControlPrototype()->addClass(empty($usedPrimary) ? $primaryButtonClass : $btnClass ?? $secondaryButtonClass);
-				$usedPrimary = true;
+			if ($control instanceof BaseControl) {
+				$type = $control->getOption('type');
+				if ($control instanceof Button) {
+					$btnClass = $control->getOption(self::OptionButtonClass);
+					$control->getControlPrototype()->setAttribute('class', empty($usedPrimary) ? $primaryButtonClass : $btnClass ?? $secondaryButtonClass);
+					$usedPrimary = true;
 
-			} elseif (in_array($type, ['text', 'textarea'], true)) {
-				$control->getControlPrototype()->addClass('form-control');
+				} elseif ($control instanceof TextBase) {
+					$control->getControlPrototype()->setAttribute('class', 'form-control');
 
-			} elseif ($type === 'select') {
-				$control->getControlPrototype()->addClass('form-select');
+				} elseif ($control instanceof SelectBox) {
+					$control->getControlPrototype()->setAttribute('class', 'form-select');
 
-			} elseif ($type === 'file') {
-				$control->getControlPrototype()->addClass('form-control form-control-file');
+				} elseif ($control instanceof UploadControl) {
+					$control->getControlPrototype()->setAttribute('class', 'form-control form-control-file');
 
-			} elseif (in_array($type, ['checkbox', 'radio'], true)) {
-				if ($control instanceof Checkbox) {
-					$control->getLabelPrototype()->setAttribute('class', 'form-check-label');
-				} else {
-					$control->getItemLabelPrototype()->addClass('form-check-label');
-				}
+				} elseif ($control instanceof Checkbox || $control instanceof RadioList) { // @todo test & add checkbox list
+					if ($control instanceof Checkbox) {
+						$control->getLabelPrototype()->setAttribute('class', 'form-check-label');
+					} else {
+						$control->getItemLabelPrototype()->setAttribute('class', 'form-check-label');
+					}
 
-				$control->getControlPrototype()->setAttribute('class', 'form-check-input');
-				if ($control->getOption(self::OPTION_SWITCH)) {
-					$control->getContainerPrototype()->setName('div')->setAttribute('class', 'form-check form-switch');
+					$control->getControlPrototype()->setAttribute('class', 'form-check-input');
+					if ($control->getOption(self::OptionSwitch)) {
+						$control->getContainerPrototype()->setName('div')->setAttribute('class', 'form-check form-switch');
 
-				} else {
-					$control->getContainerPrototype()->setName('div')->setAttribute('class', 'form-check');
+					} else {
+						$control->getContainerPrototype()->setName('div')->setAttribute('class', 'form-check');
+					}
 				}
 			}
 		}

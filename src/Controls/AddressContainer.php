@@ -18,19 +18,19 @@ class AddressContainer extends Container
 	{
 		$this->addText('street', sprintf('%s.street.label', $name))
 			->setRequired(sprintf('%s.street.rules.required', $name))
-			->addRule(Form::MAX_LENGTH, sprintf('%s.street.rules.maxLength', $name), 160);
+			->addRule(Form::MaxLength, sprintf('%s.street.rules.maxLength', $name), 160);
 
 		$this->addText('streetNo', sprintf('%s.streetNo.label', $name))
 			->setRequired(sprintf('%s.streetNo.rules.required', $name))
-			->addRule(Form::MAX_LENGTH, sprintf('%s.streetNo.rules.maxLength', $name), 20);
+			->addRule(Form::MaxLength, sprintf('%s.streetNo.rules.maxLength', $name), 20);
 
 		$this->addText('city', sprintf('%s.city.label', $name))
 			->setRequired(sprintf('%s.city.rules.required', $name))
-			->addRule(Form::MAX_LENGTH, sprintf('%s.city.rules.maxLength', $name), 100);
+			->addRule(Form::MaxLength, sprintf('%s.city.rules.maxLength', $name), 100);
 
 		$this->addText('zipCode', sprintf('%s.zipCode.label', $name))
 			->setRequired(sprintf('%s.streetNo.rules.required', $name))
-			->addRule(Form::MAX_LENGTH, sprintf('%s.streetNo.rules.maxLength', $name), 10);
+			->addRule(Form::MaxLength, sprintf('%s.streetNo.rules.maxLength', $name), 10);
 
 		if ($countries) {
 			$this->addSelect('country', sprintf('%s.country.label', $name))

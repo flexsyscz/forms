@@ -28,7 +28,7 @@ class Bootstrap5RendererTest extends TestCase
 		$form = new Form();
 		$form->onRender[] = function(Form $form) {
 			Bootstrap5::make($form, [
-				Bootstrap5::OPTION_BUTTON_CLASS => [
+				Bootstrap5::OptionButtonClass => [
 					'primary' => 'btn btn-success',
 					'secondary' => 'btn btn-outline-light',
 				],

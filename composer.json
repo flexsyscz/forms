@@ -15,9 +15,9 @@
 		"nette/forms": "^3.1"
 	},
 	"require-dev": {
-		"nette/tester": "^2.4",
-		"phpstan/phpstan-nette": "^1.0",
-		"nette/coding-standard": "^3.2"
+		"nette/tester": "^2.5",
+		"phpstan/phpstan-nette": "^1.2",
+		"nette/coding-standard": "^3.3"
 	},
 	"autoload": {
 		"classmap": ["src/"]

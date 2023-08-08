@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Flexsyscz\Forms;
+namespace Flexsyscz\Forms\Traits;
 
 use Flexsyscz\Forms\Controls\AddressContainer;
 use Nette;
 
 
-class Form extends Nette\Forms\Form
+trait Address
 {
 	/**
 	 * @param string $name

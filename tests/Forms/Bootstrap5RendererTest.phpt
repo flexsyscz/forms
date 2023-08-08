@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Forms;
 
-use Flexsyscz\Forms\Form;
 use Flexsyscz\Forms\Renderers\Bootstrap5;
 use Nette;
 use Tester\Assert;
 use Tester\TestCase;
+use Tests\Resources\MyForm;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -25,8 +25,8 @@ class Bootstrap5RendererTest extends TestCase
 
 	public function testControl(): void
 	{
-		$form = new Form();
-		$form->onRender[] = function(Form $form) {
+		$form = new MyForm;
+		$form->onRender[] = function(Nette\Forms\Form $form) {
 			Bootstrap5::make($form, [
 				Bootstrap5::OptionButtonClass => [
 					'primary' => 'btn btn-success',

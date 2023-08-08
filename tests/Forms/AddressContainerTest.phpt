@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Forms;
 
-use Flexsyscz\Forms\Form;
 use Nette;
 use Tester\Assert;
 use Tester\TestCase;
+use Tests\Resources\MyForm;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -24,7 +24,7 @@ class AddressContainerTest extends TestCase
 
 	public function testControl(): void
 	{
-		$form = new Form();
+		$form = new MyForm;
 		$address = $form->addAddress('billingAddress');
 
 		$street = $address->getComponent('street');

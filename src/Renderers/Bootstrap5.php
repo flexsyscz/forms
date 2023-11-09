@@ -7,6 +7,7 @@ namespace Flexsyscz\Forms\Renderers;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\Checkbox;
+use Nette\Forms\Controls\CheckboxList;
 use Nette\Forms\Controls\RadioList;
 use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Controls\TextBase;
@@ -64,7 +65,7 @@ class Bootstrap5 implements Renderer
 				} elseif ($control instanceof UploadControl) {
 					$control->getControlPrototype()->setAttribute('class', 'form-control form-control-file');
 
-				} elseif ($control instanceof Checkbox || $control instanceof RadioList) { // @todo test & add checkbox list
+				} elseif ($control instanceof Checkbox || $control instanceof RadioList || $control instanceof CheckboxList) {
 					if ($control instanceof Checkbox) {
 						$control->getLabelPrototype()->setAttribute('class', 'form-check-label');
 					} else {

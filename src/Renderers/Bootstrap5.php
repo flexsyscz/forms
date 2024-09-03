@@ -8,6 +8,7 @@ use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\Controls\CheckboxList;
+use Nette\Forms\Controls\MultiSelectBox;
 use Nette\Forms\Controls\RadioList;
 use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Controls\TextBase;
@@ -59,7 +60,7 @@ class Bootstrap5 implements Renderer
 				} elseif ($control instanceof TextBase) {
 					$control->getControlPrototype()->setAttribute('class', 'form-control');
 
-				} elseif ($control instanceof SelectBox) {
+				} elseif ($control instanceof SelectBox || $control instanceof MultiSelectBox) {
 					$control->getControlPrototype()->setAttribute('class', 'form-select');
 
 				} elseif ($control instanceof UploadControl) {

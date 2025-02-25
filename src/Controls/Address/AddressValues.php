@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Flexsyscz\Forms\Controls;
+namespace Flexsyscz\Forms\Controls\Address;
 
 
 class AddressValues

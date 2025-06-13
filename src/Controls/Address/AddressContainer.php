@@ -14,7 +14,7 @@ class AddressContainer extends Container
 	 * @param string $name
 	 * @param string[]|null $countries
 	 */
-	public function __construct(string $name, array $countries = null)
+	public function __construct(string $name, ?array $countries = null)
 	{
 		$this->addText('street', sprintf('%s.street.label', $name))
 			->setRequired(sprintf('%s.street.rules.required', $name))

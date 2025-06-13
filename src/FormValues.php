@@ -8,7 +8,7 @@ use Nextras\Dbal\Utils\DateTimeImmutable;
 
 class FormValues
 {
-	public static function toDateTime(string $value, string $format = null): DateTimeImmutable
+	public static function toDateTime(string $value, ?string $format = null): DateTimeImmutable
 	{
 		$formats = $format ? [$format] : [
 			'j. n. Y',

@@ -9,7 +9,7 @@ use Nette;
 
 abstract class FormFactory
 {
-	public function create(callable $onRender = null): Nette\Application\UI\Form
+	public function create(?callable $onRender = null): Nette\Application\UI\Form
 	{
 		$form = new Nette\Application\UI\Form();
 		$form->onRender[] = $onRender ?? Nette\Utils\Callback::check([$this, 'onRender']);
